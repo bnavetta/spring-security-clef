@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+    <head>
+        <title>Welcome</title>
+    </head>
+    <body>
+        <section layout:fragment="content">
+            <h1>Welcome</h1>
+            <p>
+                <a th:href="@{/login}">Log in</a> or <a th:href="@{/register}">sign up</a>!
+            </p>
+
+            <p>
+                Go to the members-only <a th:href="@{/secret}">secret page</a>.
+            </p>
+        </section>
+    </body>
+</html>

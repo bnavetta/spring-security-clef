@@ -1,0 +1,3 @@
+include 'clef-starter-sample'
+
+rootProject.name = 'clef-spring-boot-starter'

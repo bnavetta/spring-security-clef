@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+    <head>
+        <title th:text="${title}">Log In / Register</title>
+    </head>
+    <body>
+        <section layout:fragment="content">
+            <h1 th:text="${title}">Log In / Register</h1>
+
+            <div th:utext="${loginForm.toHtml()}"></div>
+            <div th:unless="${isRegistering}">
+                <a th:href="@{/register}">Sign Up</a>
+            </div>
+        </section>
+    </body>
+</html>
