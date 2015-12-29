@@ -1,3 +1,6 @@
-include 'clef-starter-sample'
+include 'spring-security-clef-core'
+include 'clef-spring-boot-autoconfigure'
+include 'clef-spring-boot-starter'
+include 'clef-spring-boot-sample'
 
-rootProject.name = 'clef-spring-boot-starter'
+rootProject.name = 'spring-security-clef'

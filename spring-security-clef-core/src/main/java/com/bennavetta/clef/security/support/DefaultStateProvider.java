@@ -1,6 +1,6 @@
-package com.bennavetta.clef.boot.support;
+package com.bennavetta.clef.security.support;
 
-import com.bennavetta.clef.boot.StateProvider;
+import com.bennavetta.clef.security.StateProvider;
 
 import com.google.common.io.BaseEncoding;
 

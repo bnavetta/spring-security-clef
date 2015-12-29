@@ -1,4 +1,4 @@
-package com.bennavetta.clef.boot.client;
+package com.bennavetta.clef.security.client;
 
 public class ClefClientException extends RuntimeException
 {

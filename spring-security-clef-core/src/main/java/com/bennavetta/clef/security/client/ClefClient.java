@@ -1,13 +1,11 @@
-package com.bennavetta.clef.boot.client;
+package com.bennavetta.clef.security.client;
+
+import com.bennavetta.clef.security.UserInfo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Map;
 
 public class ClefClient
 {
@@ -42,9 +40,7 @@ public class ClefClient
         handshake.add("app_id", appId);
         handshake.add("app_secret", appSecret);
 
-        ResponseEntity<HandshakeResponse> responseEntity =
-                restTemplate.postForEntity(AUTHORIZE_URL, handshake, HandshakeResponse.class);
-        HandshakeResponse response = responseEntity.getBody();
+        HandshakeResponse response = restTemplate.postForObject(AUTHORIZE_URL, handshake, HandshakeResponse.class);
         if (response.success)
         {
             return response.accessToken;

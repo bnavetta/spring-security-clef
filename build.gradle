@@ -1,52 +1,59 @@
 buildscript {
     repositories {
         maven { url 'http://repo.spring.io/plugins-release' }
+        maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
         classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
+        classpath 'io.spring.gradle:dependency-management-plugin:0.5.4.RELEASE'
     }
 }
 
 plugins {
-    id 'java'
     id 'eclipse'
     id 'idea'
-    id 'io.spring.dependency-management' version '0.5.4.RELEASE'
 }
 
-apply plugin: 'propdeps'
-apply plugin: 'propdeps-maven'
-apply plugin: 'propdeps-idea'
-apply plugin: 'propdeps-eclipse'
+subprojects {
+    apply plugin: 'propdeps'
+    apply plugin: 'propdeps-maven'
+    apply plugin: 'propdeps-idea'
+    apply plugin: 'propdeps-eclipse'
+    apply plugin: 'io.spring.dependency-management'
 
-repositories {
-    jcenter()
-    mavenCentral()
-}
-
-dependencyManagement {
-    dependencies {
-        dependency 'com.google.guava:guava:19.0'
+    repositories {
+        jcenter()
+        mavenCentral()
     }
 
-    imports {
-        mavenBom 'io.spring.platform:platform-bom:2.0.1.RELEASE'
+    dependencyManagement {
+        dependencies {
+            dependency 'com.google.guava:guava:19.0'
+        }
+
+        imports {
+            mavenBom 'io.spring.platform:platform-bom:2.0.1.RELEASE'
+        }
     }
 }
 
-dependencies {
-    compile 'org.springframework:spring-web'
-    compile 'org.springframework:spring-webmvc'
-    compile 'org.springframework.boot:spring-boot'
-    compile 'org.springframework.boot:spring-boot-autoconfigure'
-    compile 'org.springframework.security:spring-security-web'
-    compile 'org.springframework.security:spring-security-config'
-    compile 'org.slf4j:slf4j-api'
-    compile 'com.fasterxml.jackson.core:jackson-databind'
-    compile 'javax.servlet:javax.servlet-api'
-    compile 'com.google.guava:guava'
-
-    optional 'org.springframework.boot:spring-boot-configuration-processor'
-}
-
-compileJava.dependsOn(processResources)
+//
+// plugins {
+//     id 'java'
+//     id 'eclipse'
+//     id 'idea'
+//     id 'io.spring.dependency-management' version '0.5.4.RELEASE'
+// }
+//
+// dependencies {
+//     compile 'org.springframework:spring-webmvc'
+//     compile 'org.springframework.security:spring-security-web'
+//     compile 'org.springframework.security:spring-security-config'
+//     compile 'org.slf4j:slf4j-api'
+//     compile 'com.fasterxml.jackson.core:jackson-databind'
+//     compile 'javax.servlet:javax.servlet-api'
+//     compile 'com.google.guava:guava'
+//
+// }
+//
+// compileJava.dependsOn(processResources)

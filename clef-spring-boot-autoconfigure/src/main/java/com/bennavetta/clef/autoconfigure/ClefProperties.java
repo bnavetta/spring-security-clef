@@ -1,7 +1,4 @@
-package com.bennavetta.clef.boot;
-
-import com.bennavetta.clef.boot.form.FormColor;
-import com.bennavetta.clef.boot.form.Style;
+package com.bennavetta.clef.autoconfigure;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -22,16 +19,6 @@ public class ClefProperties
      * The full URL to direct Clef at.
      */
     private String redirectUrl = "/clef/callback";
-
-    /**
-     * The color to use on Clef forms.
-     */
-    private FormColor formColor = FormColor.BLUE;
-
-    /**
-     * The style to use for Clef forms.
-     */
-    private Style formStyle = Style.FLAT;
 
     public String getAppId()
     {
@@ -61,35 +48,5 @@ public class ClefProperties
     public void setRedirectUrl(String redirectUrl)
     {
         this.redirectUrl = redirectUrl;
-    }
-
-    public FormColor getFormColor()
-    {
-        return formColor;
-    }
-
-    public void setFormColor(FormColor formColor)
-    {
-        this.formColor = formColor;
-    }
-
-    public void setFormColor(String formColor)
-    {
-        this.formColor = FormColor.valueOf(formColor.toUpperCase());
-    }
-
-    public Style getFormStyle()
-    {
-        return formStyle;
-    }
-
-    public void setFormStyle(Style formStyle)
-    {
-        this.formStyle = formStyle;
-    }
-
-    public void setFormStyle(String formStyle)
-    {
-        this.formStyle = Style.valueOf(formStyle.toUpperCase());
     }
 }

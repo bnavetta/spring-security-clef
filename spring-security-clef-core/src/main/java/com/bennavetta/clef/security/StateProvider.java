@@ -1,4 +1,4 @@
-package com.bennavetta.clef.boot;
+package com.bennavetta.clef.security;
 
 /**
  * Provider for the random state used in Clef logins.

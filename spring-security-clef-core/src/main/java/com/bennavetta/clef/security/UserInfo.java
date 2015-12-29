@@ -1,4 +1,4 @@
-package com.bennavetta.clef.boot.client;
+package com.bennavetta.clef.security;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;

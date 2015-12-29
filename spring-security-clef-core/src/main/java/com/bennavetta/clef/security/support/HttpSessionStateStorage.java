@@ -1,6 +1,6 @@
-package com.bennavetta.clef.boot.support;
+package com.bennavetta.clef.security.support;
 
-import com.bennavetta.clef.boot.StateStorage;
+import com.bennavetta.clef.security.StateStorage;
 
 import java.time.Instant;
 import javax.servlet.http.HttpServletRequest;
