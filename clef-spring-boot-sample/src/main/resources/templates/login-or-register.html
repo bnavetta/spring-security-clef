@@ -9,7 +9,13 @@
         <section layout:fragment="content">
             <h1 th:text="${title}">Log In / Register</h1>
 
-            <div th:utext="${loginForm.toHtml()}"></div>
+            <div class="clef-wrapper">
+                <script class="clef-button" src="https://clef.io/v3/clef.js"
+                    th:attr="data-app-id=${loginState.appId},data-redirect-url=${loginState.redirectUri},data-state=${loginState.state},data-type=${isRegistering ? 'register' : 'login'}">
+                    data-color="blue"
+                    data-style="flat"
+                </script>
+            </div>
             <div th:unless="${isRegistering}">
                 <a th:href="@{/register}">Sign Up</a>
             </div>
