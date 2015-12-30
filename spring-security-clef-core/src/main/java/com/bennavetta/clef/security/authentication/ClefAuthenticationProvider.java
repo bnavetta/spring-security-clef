@@ -62,7 +62,7 @@ public class ClefAuthenticationProvider implements AuthenticationProvider, Initi
         additionalAuthenticationChecks(userDetails);
 
         // TODO: include Clef ID?
-        ClefAuthentication responseAuth = new ClefAuthentication(userDetails, accessToken);
+        ClefAuthentication responseAuth = new ClefAuthentication(userDetails, info.getClefId(), accessToken);
         responseAuth.setAuthenticated(true);
         return responseAuth;
     }

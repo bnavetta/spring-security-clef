@@ -40,12 +40,22 @@ public class UserServicesImpl implements UserServices
     @Override
     public void setLoggedOutAt(String clefId, Instant loggedOutAt)
     {
-
+        User user = userRepository.findByClefId(clefId);
+        if (user != null)
+        {
+            user.setLoggedOutAt(loggedOutAt);
+            userRepository.save(user);
+        }
     }
 
     @Override
     public Instant getLoggedOutAt(String clefId)
     {
+        User user = userRepository.findByClefId(clefId);
+        if (user != null)
+        {
+            return user.getLoggedOutAt();
+        }
         return null;
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.Instant;
 import java.util.Collection;
 
 public class User implements UserDetails
@@ -16,6 +17,13 @@ public class User implements UserDetails
 
     private String clefId;
     private String email;
+
+    /*
+    In a larger application, it might make sense to store this outside the main user database,
+    maybe in Redis or some other fast in-memory store, especially since it gets checked on every
+    request.
+     */
+    private Instant loggedOutAt;
 
     public String getId()
     {
@@ -45,6 +53,16 @@ public class User implements UserDetails
     public void setEmail(String email)
     {
         this.email = email;
+    }
+
+    public Instant getLoggedOutAt()
+    {
+        return loggedOutAt;
+    }
+
+    public void setLoggedOutAt(Instant loggedOutAt)
+    {
+        this.loggedOutAt = loggedOutAt;
     }
 
     @Override

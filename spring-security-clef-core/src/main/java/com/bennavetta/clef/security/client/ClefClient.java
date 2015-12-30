@@ -11,6 +11,7 @@ public class ClefClient
 {
     private static final String AUTHORIZE_URL = "https://clef.io/api/v1/authorize";
     private static final String INFO_URL = "https://clef.io/api/v1/info?access_token={0}";
+    private static final String LOGOUT_URL = "https://clef.io/api/v1/logout";
 
     private final String appId;
     private final String appSecret;
@@ -64,6 +65,24 @@ public class ClefClient
         }
     }
 
+    public String exchangeLogoutToken(String logoutToken) throws ClefClientException
+    {
+        MultiValueMap<String, String> data = new LinkedMultiValueMap<String, String>();
+        data.add("logout_token", logoutToken);
+        data.add("app_id", appId);
+        data.add("app_secret", appSecret);
+
+        LogoutResponse response = restTemplate.postForObject(LOGOUT_URL, data, LogoutResponse.class);
+        if (response.success)
+        {
+            return response.clefId;
+        }
+        else
+        {
+            throw new ClefClientException(response.error);
+        }
+    }
+
     private static class HandshakeResponse
     {
         @JsonProperty
@@ -83,6 +102,18 @@ public class ClefClient
 
         @JsonProperty
         UserInfo info;
+
+        @JsonProperty
+        String error;
+    }
+
+    private static class LogoutResponse
+    {
+        @JsonProperty
+        boolean success;
+
+        @JsonProperty("clef_id")
+        String clefId;
 
         @JsonProperty
         String error;

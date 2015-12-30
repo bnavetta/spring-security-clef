@@ -20,6 +20,16 @@ public class ClefProperties
      */
     private String redirectUrl = "/clef/callback";
 
+    /**
+     * The URL to register the logout webhook at.
+     */
+    private String logoutWebhookUrl = "/clef/logout";
+
+    /**
+     * The URL to redirect to if the user is logged out.
+     */
+    private String loggedOutUrl = "";
+
     public String getAppId()
     {
         return appId;
@@ -48,5 +58,25 @@ public class ClefProperties
     public void setRedirectUrl(String redirectUrl)
     {
         this.redirectUrl = redirectUrl;
+    }
+
+    public String getLogoutWebhookUrl()
+    {
+        return logoutWebhookUrl;
+    }
+
+    public void setLogoutWebhookUrl(String logoutWebhookUrl)
+    {
+        this.logoutWebhookUrl = logoutWebhookUrl;
+    }
+
+    public String getLoggedOutUrl()
+    {
+        return loggedOutUrl;
+    }
+
+    public void setLoggedOutUrl(String loggedOutUrl)
+    {
+        this.loggedOutUrl = loggedOutUrl;
     }
 }
