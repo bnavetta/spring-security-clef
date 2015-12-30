@@ -1,8 +1,0 @@
-clef:
-  app-id: 87139aeeacb111a77cc014d498c102c8
-  app-secret: 5a787d755631ecb136b101dc24fd99fb
-
-logging:
-  level:
-    com.bennavetta: TRACE
-    org.springframework.security: TRACE
