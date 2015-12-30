@@ -1,16 +1,9 @@
 package com.bennavetta.clef.security.support;
 
 import com.bennavetta.clef.security.StateStorage;
-import com.bennavetta.clef.security.UserInfo;
-import com.bennavetta.clef.security.UserServices;
 import com.bennavetta.clef.security.authentication.ClefCodeAuthenticationToken;
-import com.bennavetta.clef.security.client.ClefClient;
-import com.bennavetta.clef.security.client.ClefClientException;
 
 import com.google.common.base.Objects;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;

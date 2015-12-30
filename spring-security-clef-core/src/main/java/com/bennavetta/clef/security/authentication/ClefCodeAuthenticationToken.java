@@ -1,11 +1,9 @@
 package com.bennavetta.clef.security.authentication;
 
-import com.google.common.collect.Lists;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Objects;
 
 public class ClefCodeAuthenticationToken extends AbstractAuthenticationToken
