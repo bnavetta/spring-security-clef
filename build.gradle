@@ -54,15 +54,15 @@ subprojects {
 
 allprojects {
     apply plugin: 'nebula.nebula-release'
-}
-
-subprojects {
-    apply plugin: 'nebula.nebula-bintray'
 
     ext {
         bintrayUser = System.env['BINTRAY_USER']
         bintrayKey = System.env['BINTRAY_KEY']
     }
+}
+
+subprojects {
+    apply plugin: 'nebula.nebula-bintray'
 
     task validateEnv << {
         ['BINTRAY_USER', 'BINTRAY_KEY', 'GPG_PASSPHRASE'].each { key ->
