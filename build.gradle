@@ -1,11 +1,15 @@
 buildscript {
     repositories {
+        jcenter()
+        mavenCentral()
         maven { url 'http://repo.spring.io/plugins-release' }
         maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
-        classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
-        classpath 'io.spring.gradle:dependency-management-plugin:0.5.4.RELEASE'
+        classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7+'
+        classpath 'io.spring.gradle:dependency-management-plugin:0.5.+'
+        classpath 'com.netflix.nebula:nebula-bintray-plugin:3.1.+'
+        classpath 'com.netflix.nebula:nebula-release-plugin:3.1.+'
     }
 }
 
@@ -14,12 +18,20 @@ plugins {
     id 'idea'
 }
 
+allprojects {
+    apply plugin: 'nebula.nebula-release'
+}
+
 subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven-publish'
+
     apply plugin: 'propdeps'
     apply plugin: 'propdeps-maven'
     apply plugin: 'propdeps-idea'
     apply plugin: 'propdeps-eclipse'
     apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'nebula.nebula-bintray'
 
     repositories {
         jcenter()
@@ -35,25 +47,44 @@ subprojects {
             mavenBom 'io.spring.platform:platform-bom:2.0.1.RELEASE'
         }
     }
-}
 
-//
-// plugins {
-//     id 'java'
-//     id 'eclipse'
-//     id 'idea'
-//     id 'io.spring.dependency-management' version '0.5.4.RELEASE'
-// }
-//
-// dependencies {
-//     compile 'org.springframework:spring-webmvc'
-//     compile 'org.springframework.security:spring-security-web'
-//     compile 'org.springframework.security:spring-security-config'
-//     compile 'org.slf4j:slf4j-api'
-//     compile 'com.fasterxml.jackson.core:jackson-databind'
-//     compile 'javax.servlet:javax.servlet-api'
-//     compile 'com.google.guava:guava'
-//
-// }
-//
-// compileJava.dependsOn(processResources)
+    publishing {
+        publications {
+            java(MavenPublication) {
+                from components.java
+            }
+        }
+    }
+
+    bintray {
+        user = System.env['BINTRAY_USER']
+        key = System.env['BINTRAY_KEY']
+        publications = ['java']
+
+        dryRun = true
+        publish = false
+
+        pkg {
+            repo = 'maven'
+            userOrg = 'com.bennavetta'
+            websiteUrl = 'https://github.com/roguePanda/spring-security-clef'
+            vcsUrl = 'https://github.com/roguePanda/spring-security-clef.git'
+            issueTrackerUrl = 'https://github.com/roguePanda/spring-security-clef/issues'
+            labels = ['spring-security', 'clef', 'spring-boot']
+
+            version {
+                gpg {
+                    sign = true
+                }
+            }
+        }
+    }
+
+    artifactory {
+        publish {
+            defaults {
+                publications 'java'
+            }
+        }
+    }
+}
