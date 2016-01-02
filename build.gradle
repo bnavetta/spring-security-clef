@@ -67,7 +67,7 @@ subprojects {
 
         pkg {
             repo = 'maven'
-            userOrg = 'com.bennavetta'
+            userOrg = 'ben-navetta'
             websiteUrl = 'https://github.com/roguePanda/spring-security-clef'
             vcsUrl = 'https://github.com/roguePanda/spring-security-clef.git'
             issueTrackerUrl = 'https://github.com/roguePanda/spring-security-clef/issues'
