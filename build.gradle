@@ -18,24 +18,6 @@ plugins {
     id 'idea'
 }
 
-allprojects {
-    apply plugin: 'nebula.nebula-release'
-
-    ext {
-        bintrayUser = System.env['BINTRAY_USER']
-        bintrayKey = System.env['BINTRAY_KEY']
-    }
-
-    task validateEnv << {
-        ['BINTRAY_USER', 'BINTRAY_KEY', 'GPG_PASSPHRASE'].each { key ->
-            if (!System.getenv(key))
-            {
-                throw new GradleException("Environment variable $key must be set")
-            }
-        }
-    }
-}
-
 subprojects {
     apply plugin: 'java'
     apply plugin: 'maven-publish'
@@ -45,10 +27,6 @@ subprojects {
     apply plugin: 'propdeps-idea'
     apply plugin: 'propdeps-eclipse'
     apply plugin: 'io.spring.dependency-management'
-
-    apply plugin: 'nebula.nebula-bintray'
-
-    tasks.release.dependsOn tasks.validateEnv
 
     repositories {
         jcenter()
@@ -67,14 +45,43 @@ subprojects {
 
     publishing {
         publications {
-            java(MavenPublication) {
+            main(MavenPublication) {
                 from components.java
             }
         }
     }
+}
+
+allprojects {
+    apply plugin: 'nebula.nebula-release'
+}
+
+subprojects {
+    apply plugin: 'nebula.nebula-bintray'
+
+    ext {
+        bintrayUser = System.env['BINTRAY_USER']
+        bintrayKey = System.env['BINTRAY_KEY']
+    }
+
+    task validateEnv << {
+        ['BINTRAY_USER', 'BINTRAY_KEY', 'GPG_PASSPHRASE'].each { key ->
+            if (!System.getenv(key))
+            {
+                throw new GradleException("Environment variable $key must be set")
+            }
+        }
+    }
+
+    tasks.whenTaskAdded { task ->
+        if (task.name == 'release')
+        {
+            task.dependsOn 'validateEnv'
+        }
+    }
 
     bintray {
-        publications = ['java']
+        publications = ['main']
 
         pkg {
             repo = 'maven'
@@ -97,7 +104,7 @@ subprojects {
     artifactory {
         publish {
             defaults {
-                publications 'java'
+                publications 'main'
             }
         }
     }
