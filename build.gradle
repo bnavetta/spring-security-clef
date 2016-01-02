@@ -47,6 +47,7 @@ subprojects {
         publications {
             main(MavenPublication) {
                 from components.java
+                groupId 'com.bennavetta.clef'
             }
         }
     }
@@ -73,12 +74,7 @@ subprojects {
         }
     }
 
-    tasks.whenTaskAdded { task ->
-        if (task.name == 'release')
-        {
-            task.dependsOn 'validateEnv'
-        }
-    }
+    // tasks.releaseCheck.dependsOn validateEnv
 
     bintray {
         publications = ['main']
